@@ -1,10 +1,15 @@
+
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Login - Brand</title>
+    <title>Login - Sikshyarasarokar</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -26,13 +31,14 @@
                                         <h4 class="text-dark mb-4">Admin Login !</h4>
                                     </div>
                                     <form class="user" action="admin_login.php" method="post">
-                                        <div class="form-group"><input class="form-control form-control-user" type="email" name="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="email"></div>
-                                        <div class="form-group"><input class="form-control form-control-user" type="password"  name="password" id="exampleInputPassword" placeholder="Password" name="password"></div>
+                                        <div class="form-group"><input class="form-control form-control-user" type="email" name="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." ></div>
+                                        <div class="form-group"><input class="form-control form-control-user" type="password"  name="password" id="exampleInputPassword" placeholder="Password" ></div>
                                         <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
+                                            <!-- <div class="custom-control custom-checkbox small">
                                                 <div class="form-check"><input class="form-check-input custom-control-input" type="checkbox" id="formCheck-1"><label class="form-check-label custom-control-label" for="formCheck-1">Remember Me</label></div>
-                                            </div>
-                                        </div><button class="btn btn-primary btn-block text-white btn-user" name="submit" type="submit">Login</button>
+                                            </div> -->
+                                        </div>
+                                        <button class="btn btn-primary btn-block text-white btn-user" name="submit" value="Login" type="submit">Login</button>
                                         <hr><a class="btn btn-primary btn-block text-white btn-google btn-user" role="button"><i class="fab fa-google"></i>&nbsp; Login with Google</a><a class="btn btn-primary btn-block text-white btn-facebook btn-user" role="button"><i class="fab fa-facebook-f"></i>&nbsp; Login with Facebook</a>
                                         <hr>
                                     </form>
@@ -53,6 +59,7 @@
 </body>
 
 </html>
+
 <?php
     include('db/connection.php');
 
@@ -62,16 +69,17 @@
         $password=$_POST['password'];
 
         $query=mysqli_query($conn,"Select * from admin_login where email='$email' AND password='$password' ");
-        if($query){
-            if (mysqli_num_rows($query)>0){
 
-                header('location:home.php');
-            }
-            else
-                {
-                    echo "<script> alert('Invalid username and Password')</script>";
+            if($query){
+                if(mysqli_num_rows($query)>0){
+                    $_SESSION['email']=$email;
+
+                    header('location:home.php');
+                }else {
+                    # code...
+                    echo "<script> alert('Invalid username and Password'); </script>";
                 }
-        }
+            }
 
 
     }
