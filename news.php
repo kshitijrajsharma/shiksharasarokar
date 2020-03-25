@@ -21,12 +21,35 @@ include('include/header.php');
     <div class="text-right">
         <button class="btn"><a href="addnews.php">Add News</a></button>
     </div>
-   
+    <table class="table">
+    <thead>
+        <tr>
+        <th scope="col">id</th>
+        <th scope="col">Title</th>
+        <th scope="col">Date</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+        <th scope="col">View</th>
+        </tr>
+    </thead>
+    <tbody>
         <?php 
         include('db/connection.php');
-        
-        ?> 
-  
+        $query=mysqli_query($conn,"select * from news");
+        while($row=mysqli_fetch_array($query)){
+
+        ?>
+
+        <tr>
+            <th scope="row"><?php echo $row['id'];?></th>
+            <td><?php echo $row['title'];?></td>
+            <td><?php echo $row['date'];?></td>
+            <td><a href="editnews.php?edit=<?php echo $row['id'];?>" class="btn btn-info">Edit</td>
+            <td><a href="deletenews.php?del=<?php echo $row['id'];?>" class="btn btn-danger">Delete</td>
+        </tr>
+        <?php }?> 
+    </tbody>
+    </table>
 
 </div>
 <?php

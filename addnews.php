@@ -19,24 +19,57 @@ include('include/header.php');
         <li class="breadcrumb-item active">Add News</li>
     </ul>
 </div>
-    <form action="addcategory.php" onsubmit="validateform()"  method="post" name="categoryform">
+    <form onsubmit="validateform()"  method="post" name="newsform" enctype="multipart/form-data">
         <h1> Add News</h1>
         <hr>
         <div class="form-group">
             <label for="email">Title</label>
-            <input type="text" placeholder="Enter Category Name" name="category" class="form-control" id="email">
+            <input type="text" placeholder="Enter News Title" name="title" class="form-control" id="email">
         </div>
         <div class="form-group">
             <label for="pwd">Description :</label>
-            <textarea class="form-control" placeholder="Enter Category Description" rows="5"  name="des" id="comment" ></textarea>
+            <textarea class="form-control" name="description" placeholder="Enter News Description" rows="5"  name="des" id="comment" ></textarea>
         </div>
-        <input type="submit" name="submit" class="btn btn-primary" value="Add Category">
+        <div class="form-group">
+            <label for="email">Date</label>
+            <input type="date"  name="date" class="form-control" id="email">
+        </div>
+        <div class="form-group">
+            <label for="email">Thumbnail</label>
+            <input type="file"  name="thumbnail" class="form-control img-thumbnail" id="email">
+        </div>
+        <div class="form-group">
+            <label for="email">Category</label>
+            <select name="category" class="form-control" id="">
+            <?php
+            include('db/connection.php');
+
+            $query= mysqli_query($conn,"select *  from category ");
+            while($row=mysqli_fetch_array($query)){
+                $category= $row['category_name'];
+                ?>
+                <option value=" "><?php echo $category;?></option>
+                <?php   } ?>
+            </select>
+           
+        </div>
+        <input type="submit" name="submit" class="btn btn-primary" value="Add News">
     </form>
     <script>
       function validateform(){
-          var x = document.forms['categoryform']['category'].value;
+          var x = document.forms['newsform']['title'].value;
+          var y = document.forms['newsform']['description'].value;
+          var z = document.forms['newsform']['date'].value;
           if(x==""){
-              alert('Category name cannot be empty !');
+              alert('Title  cannot be empty !');
+            return false;
+          }
+          if(y.length<100){
+              alert('Descripiton of News is too small !');
+            return false;
+          }
+          if(z==""){
+              alert('Oops ! You forgot to mention Date ');
             return false;
           }
       }
@@ -45,5 +78,30 @@ include('include/header.php');
 <?php
 include('include/footer.php');
 ?>
+<?php
+  include('db/connection.php');
+  if(isset($_POST["submit"])){
+        $title=$_POST['title'];
+        if($title!=""){
+          $description=$_POST['description'];
+          $date=$_POST['date'];
+          $thumbnail=$_FILES['thumbnail']['name'];
+          $tmp_thumbnail=$_FILES['thumbnail']['tmp_name'];
+          $category=$_POST['category'];
 
+          move_uploaded_file($tmp_thumbnail,"images/thumbnail");
+          
+            $query=mysqli_query($conn,"insert into news(title,description,date,category,thumbnail) values('$title','$description','$date','$category','$thumbnail')");
+            if($query){
+              echo "<script> alert('News Uploaded Successfully')</script>";
+              echo "<script>window.location='news.php';</script>";
+            }else {
+              # code...
+              echo "<script> alert('Please Try Again ')</script>";
+          }
+        }
+        
+  }
+
+?>
 
