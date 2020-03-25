@@ -37,8 +37,9 @@ include('include/header.php');
         <tr>
             <th scope="row"><?php echo $row['id'];?></th>
             <td><?php echo $row['category_name'];?></td>
-            <td><?php echo $row['des'];?></td>
+            <td><?php echo substr($row['des'],0,150);?></td>
             <td><a href="edit.php?edit=<?php echo $row['id'];?>" class="btn btn-info">Edit</td>
+            <td><a href="delete.php?del=<?php echo $row['id'];?>" class="btn btn-danger">Delete</td>
         </tr>
         <?php }?> 
     </tbody>

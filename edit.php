@@ -31,7 +31,7 @@ while ($row=mysqli_fetch_array($query)){
         <hr>
         <div class="form-group">
             <label for="email">Category</label>
-            <input type="text" name="category" value="<?php echo $row['category_name'];?>" class="form-control" id="email">
+            <input type="text" name="category" value="<?php echo $category;?>" class="form-control" id="email">
         </div>
         <div class="form-group">
             <label for="pwd">Description :</label>
@@ -63,7 +63,7 @@ include('include/footer.php');
           $query1=mysqli_query($conn,"update  category set category_name='$category_name', des='$des1' where id='$id1'");
           if($query1){
             echo "<script> alert('Category updated Successfully')</script>";
-            
+            echo "<script>window.location='categories.php';</script>";
           }else {
             # code...
             echo "<script> alert('Please Try Again ')</script>";

@@ -8,15 +8,22 @@ if($_SESSION['email']==true){
 }
 ?>
 <?php
-$page='category';
+$page='news';
 include('include/header.php');
  ?>
-<div style="margin-left:5%; margin-top: 1%;width:70% ">
+<div style="margin-left:5%; width:70% ">
+<div>
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item active"><a href='home.php'>Home </a></li>
+    <li class="breadcrumb-item active"><a href='news.php'>News </a></li>
+        <li class="breadcrumb-item active">Add News</li>
+    </ul>
+</div>
     <form action="addcategory.php" onsubmit="validateform()"  method="post" name="categoryform">
-        <h1> Add Categories</h1>
+        <h1> Add News</h1>
         <hr>
         <div class="form-group">
-            <label for="email">Category</label>
+            <label for="email">Title</label>
             <input type="text" placeholder="Enter Category Name" name="category" class="form-control" id="email">
         </div>
         <div class="form-group">
@@ -37,33 +44,6 @@ include('include/header.php');
 </div>
 <?php
 include('include/footer.php');
-?>
-<?php
-  include('db/connection.php');
-  if(isset($_POST["submit"])){
-        $category_name=$_POST['category'];
-        if($category_name!=""){
-          $des=$_POST['des'];
-
-          $check=mysqli_query($conn,"select * from category where category_name='$category_name'");
-          if (mysqli_num_rows($check)>0){
-            echo "<script> alert('Category Name Already exist');</script>";
-            exit();
-          }else{
-            $query=mysqli_query($conn,"insert into category(category_name,des) values('$category_name','$des')");
-            if($query){
-              echo "<script> alert('Category Add Successfully')</script>";
-              echo "<script>window.location='categories.php';</script>";
-            }else {
-              # code...
-              echo "<script> alert('Please Try Again ')</script>";
-          }
-
-          }
-        }
-        
-  }
-
 ?>
 
 
