@@ -48,10 +48,6 @@ while ($row=mysqli_fetch_array($query)){
             <input type="date"  name="date" class="form-control" value="<?php echo $date;?>"id="email">
         </div>
         <div class="form-group">
-            <label for="email">Thumbnail</label>
-            <input type="file"  name="thumbnailnew" class="form-control img-thumbnail" id="email">
-        </div>
-        <div class="form-group">
             <label for="email">Category</label>
             <select name="categoryname" class="form-control" >
             <?php
@@ -67,6 +63,11 @@ while ($row=mysqli_fetch_array($query)){
             </select>
            
         </div>
+        <div class="form-group">
+            <label for="email">Thumbnail</label>
+            <input type="file"  name="thumbnailnew" class="form-control img-thumbnail" id="email">
+        </div>
+        
         <input type="submit" name="submit" class="btn btn-primary" value="Update News">
         <input type="hidden" name="id" class="btn btn-primary" value="<?php echo $id;?>">
     </form>

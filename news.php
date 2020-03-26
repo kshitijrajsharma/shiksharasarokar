@@ -28,7 +28,7 @@ include('include/header.php');
         <th scope="col">Title</th>
         <th scope="col">Date</th>
         <th scope="col">Category</th>
-        <th scope="col">Thumnail</th>
+        <th scope="col">Thumbnail</th>
         <th scope="col">Edit</th>
         <th scope="col">Delete</th>
         </tr>
@@ -44,15 +44,30 @@ include('include/header.php');
         <tr>
             <th scope="row"><?php echo $row['id'];?></th>
             <td><?php echo $row['title'];?></td>
-            <td><?php echo $row['date'];?></td>
+            <td><?php echo date("F jS,y",strtotime($row['date']));?></td>
             <td><?php echo $row['category'];?></td>
-            <td><?php echo $row['thumbnail'];?></td>
+            <td><img style="width:100px;height:100px" class="img img-thumbnail" src="images/<?php echo $row['thumbnail'];?>" ></td>
             <td><a href="editnews.php?edit=<?php echo $row['id'];?>" class="btn btn-info">Edit</td>
             <td><a href="deletenews.php?del=<?php echo $row['id'];?>" class="btn btn-danger">Delete</td>
         </tr>
-        <?php }?> 
-    </tbody>
-    </table>
+        </tbody>
+        
+
+        <?php }
+  
+    $sql= mysqli_query($conn,"select * from news");
+    echo $count=mysqli_num_rows($sql);
+    $a=$count/2;
+    ceil($a);
+    for($b=1;$b<=$a;$b++){
+        ?>
+        </table>
+        <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="news.php?page=<?php echo $b;?>"
+    ><?php echo $b; ?></a></li>
+    <?php } ?>
+        </ul>
+        </table>
 
 </div>
 <?php
