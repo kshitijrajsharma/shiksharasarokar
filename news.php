@@ -27,9 +27,10 @@ include('include/header.php');
         <th scope="col">id</th>
         <th scope="col">Title</th>
         <th scope="col">Date</th>
+        <th scope="col">Category</th>
+        <th scope="col">Thumnail</th>
         <th scope="col">Edit</th>
         <th scope="col">Delete</th>
-        <th scope="col">View</th>
         </tr>
     </thead>
     <tbody>
@@ -44,6 +45,8 @@ include('include/header.php');
             <th scope="row"><?php echo $row['id'];?></th>
             <td><?php echo $row['title'];?></td>
             <td><?php echo $row['date'];?></td>
+            <td><?php echo $row['category'];?></td>
+            <td><?php echo $row['thumbnail'];?></td>
             <td><a href="editnews.php?edit=<?php echo $row['id'];?>" class="btn btn-info">Edit</td>
             <td><a href="deletenews.php?del=<?php echo $row['id'];?>" class="btn btn-danger">Delete</td>
         </tr>
