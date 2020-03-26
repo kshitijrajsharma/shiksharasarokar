@@ -45,14 +45,14 @@ include('include/header.php');
             while($row=mysqli_fetch_array($query)){
                 $category1= $row['category_name'];
                 ?>
-                <option value=" "><?php echo $category1;?></option>
+                <option value="<?php echo $category1;?> "><?php echo $category1;?></option>
                 <?php   } ?>
             </select>
            
         </div>
         <div class="form-group">
             <label for="email">Thumbnail</label>
-            <input type="file"  name="thumbnail" class="form-control img-thumbnail" id="email">
+            <input type="file"  name="thumbnailnew" class="form-control img-thumbnail" id="email">
         </div>
         
         <input type="submit" name="submit" class="btn btn-primary" value="Add News">
@@ -83,14 +83,15 @@ include('include/footer.php');
 <?php
   include('db/connection.php');
   if(isset($_POST["submit"])){
-         $title=$_POST['title'];
-        if($title!=""){
-          $description=$_POST['description'];
-          $date=$_POST['date'];
-          $category=$_POST['categoryname'];
-          $thumbnail=$_FILES['thumbnail']['name'];
-          $tmp_thumbnail=$_FILES['thumbnail']['tmp_name'];
-          move_uploaded_file($tmp_thumbnail,"images/$thumbnail");
+    $title=$_POST['title'];
+    if($title!=""){
+      $description=$_POST['description'];
+      $date=$_POST['date'];
+      $thumbnail=$_FILES['thumbnailnew']['name'];
+      $tmp_thumbnail=$_FILES['thumbnailnew']['tmp_name'];
+      $category=$_POST['categoryname'];
+
+      move_uploaded_file($tmp_thumbnail,"images/$thumbnail");
           
             $query=mysqli_query($conn,"insert into news (title,description,date,category,thumbnail) values('$title','$description','$date','$category','$thumbnail')");
             if($query){

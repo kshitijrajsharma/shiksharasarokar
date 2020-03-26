@@ -36,7 +36,14 @@ include('include/header.php');
     <tbody>
         <?php 
         include('db/connection.php');
-        $query=mysqli_query($conn,"select * from news");
+            $page=(isset($_GET['page']) ? $_GET['page'] : null); 
+            if($page=="" || $page=="1"){
+                $page1=0;
+            }else{
+                $page1=($page*4)-4;
+            }
+
+        $query=mysqli_query($conn,"select * from news limit $page1,4");
         while($row=mysqli_fetch_array($query)){
 
         ?>
@@ -53,20 +60,27 @@ include('include/header.php');
         </tbody>
         
 
-        <?php }
-  
+        <?php } ?>
+
+        </table>
+        <ul class="pagination">
+            <li class="page-item disabled">
+            <a href="#" class="page-link">Prev </a> </li>
+        <?php
+
     $sql= mysqli_query($conn,"select * from news");
-    echo $count=mysqli_num_rows($sql);
-    $a=$count/2;
+    $count=mysqli_num_rows($sql);
+    $a=$count/4;
     ceil($a);
     for($b=1;$b<=$a;$b++){
         ?>
-        </table>
-        <ul class="pagination">
+       
         <li class="page-item"><a class="page-link" href="news.php?page=<?php echo $b;?>"
     ><?php echo $b; ?></a></li>
     <?php } ?>
-        </ul>
+            <li class="page-item disabled">
+                    <a href="#" class="page-link">Next </a> </li>
+                </ul>
         </table>
 
 </div>

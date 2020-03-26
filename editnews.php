@@ -65,7 +65,8 @@ while ($row=mysqli_fetch_array($query)){
         </div>
         <div class="form-group">
             <label for="email">Thumbnail</label>
-            <input type="file"  name="thumbnailnew" class="form-control img-thumbnail" id="email">
+            <input type="file" name="thumbnailnew" value="<?php echo $thumbnail;?>" class="form-control img-thumbnail" id="email">
+            <img style="width:100px;height:100px"  class="img img-thumbnail" src="images/<?php echo $thumbnail;?>" ></img>
         </div>
         
         <input type="submit" name="submit" class="btn btn-primary" value="Update News">
