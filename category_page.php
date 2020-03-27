@@ -2,40 +2,6 @@
 <?php
 include('include/home_header.php');
  ?>
-
-      <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
-        <div class="col-md-6 px-0">
-          <h1 class="display-4 font-italic"> Title </h1>
-          <p class="lead my-3">kachyang kuchung jindabad</p>
-          <p class="lead mb-0"><a href="" class="text-white font-weight-bold">Continue reading...</a></p>
-        </div>
-      </div>
-      
-      <div class="row mb-2">
-      <?php 
-        include('db/connection.php');
-    
-        $query=mysqli_query($conn,"select * from news order by id desc limit 1,2");
-        while($row=mysqli_fetch_array($query)){
-
-        ?>
-        <div class="col-md-6">
-          <div class="card flex-md-row mb-4 box-shadow h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-primary"><?php echo $row['category'];?></strong>
-              <h3 class="mb-0">
-                <a class="text-dark" onclick="removeday()"  href="single_news.php?single=<?php echo $row["id"];  ?>"> <?php echo $row['title'];?></a>
-              </h3>
-              <div class="mb-1 text-muted"><?php echo $row['date'];?></div>
-              <p class="card-text mb-auto"><?php echo substr( $row['description'],0,300);?></p>
-              <a href="single_news.php?single=<?php echo $row["id"];  ?>">Continue reading</a>
-            </div>
-            <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb" alt="Card image cap">
-          </div>
-        </div>
-
-    <?php } ?>
-
     <main role="main" class="container">
       <div class="row">
         <div class="col-md-8 blog-main">
@@ -46,6 +12,7 @@ include('include/home_header.php');
 
         <?php 
         include('db/connection.php');
+        $id=(isset($_GET['category']) ? $_GET['category'] : null); 
             $page=(isset($_GET['page']) ? $_GET['page'] : null); 
             if($page=="" || $page=="1"){
                 $page1=0;
@@ -53,7 +20,7 @@ include('include/home_header.php');
                 $page1=($page*4)-4;
             }
 
-        $query=mysqli_query($conn,"select * from news limit $page1,4");
+            $query=mysqli_query($conn,"select * from news where category='$id' limit $page1,4");  
         while($row=mysqli_fetch_array($query)){
 
         ?>
@@ -90,7 +57,6 @@ include('include/home_header.php');
                         </ul>
 
         </div><!-- /.blog-main -->
-
 
 
         <?php

@@ -21,9 +21,11 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item" role="presentation"><a class="nav-link " href="news_home.php"><i class="fas fa-table"></i><span>View Site</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link <?php  if($page=='home'){ echo 'active';}?>" href="home.php"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link <?php  if($page=='category'){ echo 'active';}?>" href="categories.php"><i class="fas fa-user"></i><span>Categories</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link <?php  if($page=='news'){ echo 'active';}?>" href="news.php"><i class="fas fa-table"></i><span>News</span></a></li>
+                    
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>

@@ -119,12 +119,45 @@ body {
   /*
    * Blog posts
    */
+   .glyphicon
+{
+    margin-right:4px !important; /*override*/
+}
+
+.pagination .glyphicon
+{
+    margin-right:0px !important; /*override*/
+}
+
+.pagination a
+{
+    color:#555;
+}
+
+.panel ul
+{
+    padding:0px;
+    margin:0px;
+    list-style:none;
+}
+
+.news-item
+{
+    padding:4px 4px !important;
+    margin:0px !important;
+    border-bottom:1px dotted #555 !important; 
+}
   .blog-post {
     margin-bottom: 4rem;
   }
   .blog-post-title {
     margin-bottom: .25rem;
     font-size: 2.5rem;
+  }
+  .blog-singlepost-title {
+    margin-bottom: .25rem;
+    font-size: 2.3rem;
+   
   }
   .blog-post-meta {
     margin-bottom: 1.25rem;
@@ -136,6 +169,7 @@ body {
    */
   .blog-footer {
     padding: 2.5rem 0;
+   
     color: #999;
     text-align: center;
     background-color: #f9f9f9;
